@@ -1,19 +1,40 @@
 from fastui import prebuilt_html
 from flask import Flask
 
+from fastui import AnyComponent, prebuilt_html, components as c
+from fastui.events import GoToEvent
+from src.render_response import render_response
+
 app = Flask(__name__)
 
 
 @app.get("/robots.txt")
-async def robots_txt() -> str:
+def robots_txt() -> str:
     return "User-agent: *\nAllow: /"
 
 
 @app.get("/favicon.ico")
-async def favicon_ico() -> str:
+def favicon_ico() -> str:
     return "page not found"
 
+@app.get("/api/")
+def page() -> list[AnyComponent]:
+    response = [
+		c.PageTitle(text="Title: Hello World!"),
+		c.Navbar(
+			title="Navbar Title: Hello World!",
+			title_event=GoToEvent(url="/"),
+		),
+		c.Page(
+			components=[
+				c.Heading(text="H1 Header: Hello World"),
+				c.Paragraph(text="Paragraph: This is a simple demo of FastUI."),
+			],
+		),
+	]
+    return render_response(response)
 
-@app.get("/<path:path>")
-async def html_landing():
+
+@app.get("/")
+def html_landing():
     return prebuilt_html(title="FastUI Demo")
