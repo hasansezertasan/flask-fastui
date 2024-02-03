@@ -1,5 +1,7 @@
+from typing import List
+
 from fastui import AnyComponent, prebuilt_html
-from fastui import components as c
+from fastui.components import Heading, Navbar, Page, PageTitle, Paragraph
 from fastui.events import GoToEvent
 from flask import Flask
 
@@ -19,17 +21,17 @@ def favicon_ico() -> str:
 
 
 @app.get("/api/")
-def page() -> list[AnyComponent]:
+def page() -> List[AnyComponent]:
 	response = [
-		c.PageTitle(text="Title: Hello World!"),
-		c.Navbar(
+		PageTitle(text="Title: Hello World!"),
+		Navbar(
 			title="Navbar Title: Hello World!",
 			title_event=GoToEvent(url="/"),
 		),
-		c.Page(
+		Page(
 			components=[
-				c.Heading(text="H1 Header: Hello World"),
-				c.Paragraph(text="Paragraph: This is a simple demo of FastUI."),
+				Heading(text="H1 Header: Hello World"),
+				Paragraph(text="Paragraph: This is a simple demo of FastUI."),
 			],
 		),
 	]
