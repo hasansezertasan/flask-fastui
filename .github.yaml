@@ -1,0 +1,10 @@
+# This file doesn't configure anything, it's only for documentation purposes.
+github:
+  - description: FastUI Demo written with Flask
+  - website:
+  - topics:
+    - web-application
+    - examples
+    - fastui
+    - flask
+  - include-on-home-page:
